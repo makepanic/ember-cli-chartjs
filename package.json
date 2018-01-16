@@ -4,10 +4,10 @@
   "description": "Ember component for ChartJS",
   "keywords": [
     "ember-addon",
-    "busybusy"
+    "busy-web"
   ],
   "license": "MIT",
-  "author": "Sean Stephens",
+  "author": "busy inc",
   "directories": {
     "doc": "doc",
     "test": "tests"
