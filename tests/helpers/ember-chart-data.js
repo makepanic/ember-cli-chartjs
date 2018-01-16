@@ -1,12 +1,12 @@
-import Ember from 'ember';
+import EmberObject, { computed } from '@ember/object';
 
 // Test Data
-export default Ember.Object.extend({
+export default EmberObject.extend({
   pieModelValue1: 300,
   pieModelValue2: 50,
   pieModelValue3: 100,
   pieModelDataColors: ["#F7464A", "#46BFBD", "#FDB45C", "#FF5A5E"],
-  pieModelData: Ember.computed('pieModelValue1', 'pieModelValue2', 'pieModelValue3', function() {
+  pieModelData: computed('pieModelValue1', 'pieModelValue2', 'pieModelValue3', function() {
     return [
       {
         value: parseInt(this.get('pieModelValue1')),
@@ -28,7 +28,7 @@ export default Ember.Object.extend({
   pieValue1: 300,
   pieValue2: 50,
   pieValue3: 100,
-  pieData: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
+  pieData: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return {
       labels: ['Red', "Green", "Yellow"],
       datasets: [
@@ -45,7 +45,7 @@ export default Ember.Object.extend({
     };
   }),
 
-  pieData2: Ember.computed('pieValue1', 'pieValue2', 'pieValue3', function(){
+  pieData2: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
     return {
       labels: ["Black", "Red", "Yellow"],
       datasets: [
@@ -61,7 +61,7 @@ export default Ember.Object.extend({
   labelValue1: "January",
   lineValue1: 65,
   lineValue2: 59,
-  lineData: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
+  lineData: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
     return {
         labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -88,7 +88,7 @@ export default Ember.Object.extend({
         ]
     };
   }),
-  lineData2: Ember.computed(function(){
+  lineData2: computed(function(){
     return {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -125,7 +125,7 @@ export default Ember.Object.extend({
         ]
     };
   }),
-  lineData3: Ember.computed('lineValue1', 'lineValue2', 'labelValue1', function(){
+  lineData3: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
     return {
         labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -152,7 +152,7 @@ export default Ember.Object.extend({
         ]
     };
   }),
-  barData: Ember.computed(function(){
+  barData: computed(function(){
     return {
         labels: ["January", "February", "March"],
         datasets: [

@@ -2,14 +2,23 @@
  * @module Utils
  *
  */
-import Ember from 'ember';
+import { A, isArray } from '@ember/array';
+import { isEmpty, isNone } from '@ember/utils';
+import { assert } from '@ember/debug';
+import { on } from '@ember/object/evented';
+import EmberObject, {
+  observer,
+  get,
+  set,
+  computed
+} from '@ember/object';
 
 /**
  * `Utils/ChartObject`
  *
  * @class ChartObject
  */
-export default Ember.Object.extend({
+export default EmberObject.extend({
   model: null,
   labelPath: null,
   dataPath: null,
@@ -24,25 +33,25 @@ export default Ember.Object.extend({
 	datasets: null,
 	labels: null,
 
-	_init: Ember.on('init', function() {
+	_init: on('init', function() {
 		this.setup();
 	}),
 
-	_buildData: Ember.observer('model', 'page', function() {
+	_buildData: observer('model', 'page', function() {
 		this.setup();
 		this.get('__chart').update();
 	}),
 
 	setup: function() {
-		Ember.assert("labelPath must be set to parse the model objects for labels <ember-chart::labelPath>", !Ember.isEmpty(this.get('labelPath')));
-		Ember.assert("dataPath must be set to parse the model objects for data values <ember-chart::dataPath>", !Ember.isEmpty(this.get('dataPath')));
+		assert("labelPath must be set to parse the model objects for labels <ember-chart::labelPath>", !isEmpty(this.get('labelPath')));
+		assert("dataPath must be set to parse the model objects for data values <ember-chart::dataPath>", !isEmpty(this.get('dataPath')));
 
 		this.buildLabels();
 		this.generateDatasets();
 	},
 
 	generateDatasets() {
-		const datasets = Ember.A();
+		const datasets = A();
 		const dataPaths = this.get('dataPath');
 
 		const modelPath = (this.get('modelPath') || []);
@@ -51,20 +60,20 @@ export default Ember.Object.extend({
 			const dataPath = dataPaths[index];
 
 			// make suer models were found at the path provided.
-			Ember.assert('The path provided returned no models', !Ember.isNone(models));
-			Ember.assert('The path provided did not return an array', Ember.isArray(models));
+			assert('The path provided returned no models', !isNone(models));
+			assert('The path provided did not return an array', isArray(models));
 
-			const data = Ember.A();
+			const data = A();
 			let hasOther = false;
 			let otherTotal = 0;
 
 			this.eachModel(models, (item, index, isActive, isOther) => {
 				if (isActive) {
 					// 0.01 is a hack to make all zero charts show up.
-					data.push((Ember.get(item, dataPath) || 0.01));
+					data.push((get(item, dataPath) || 0.01));
 				} else if (isOther) {
 					hasOther = true;
-					otherTotal = otherTotal + (Ember.get(item, dataPath) || 0);
+					otherTotal = otherTotal + (get(item, dataPath) || 0);
 				}
 			});
 
@@ -82,7 +91,7 @@ export default Ember.Object.extend({
 
 	createDataset(data, index) {
 		const chartOptions = this.get('chartOptions') || {};
-		const dataset = Ember.Object.create({ data });
+		const dataset = EmberObject.create({ data });
 
 		for (let i in chartOptions) {
 			if (chartOptions.hasOwnProperty(i)) {
@@ -101,22 +110,22 @@ export default Ember.Object.extend({
 	buildLabels() {
 		// add the ability to pass a static set of labels for multiple datasets.
 		const staticLabels = this.get('chartOptions.staticLabels');
-		if (!Ember.isNone(staticLabels) && Ember.isArray(staticLabels)) {
+		if (!isNone(staticLabels) && isArray(staticLabels)) {
 			this.get('labels', staticLabels);
 		} else {
 			let hasOther = false;
-			const labels = Ember.A();
+			const labels = A();
 			const modelPath = (this.get('modelPath') || []);
 			modelPath.forEach((path) => {
 				const models = this.getModels(path);
 
 				// make suer models were found at the path provided.
-				Ember.assert('The path provided returned no models', !Ember.isNone(models));
-				Ember.assert('The path provided did not return an array', Ember.isArray(models));
+				assert('The path provided returned no models', !isNone(models));
+				assert('The path provided did not return an array', isArray(models));
 
 				this.eachModel(models, (item, idx, isActive, isOther) => {
 					if (isActive) {
-						const _label = Ember.get(item, this.get('labelPath')) || '';
+						const _label = get(item, this.get('labelPath')) || '';
 						if(labels.indexOf(_label) === -1) {
 							labels.push(_label);
 						}
@@ -134,9 +143,9 @@ export default Ember.Object.extend({
 	},
 
 	setOption(data, object, key, defaultValue=null) {
-		const value = Ember.get(object, key);
-		if (!Ember.isNone(value) || !Ember.isNone(defaultValue)) {
-			Ember.set(data, key, (value || defaultValue));
+		const value = get(object, key);
+		if (!isNone(value) || !isNone(defaultValue)) {
+			set(data, key, (value || defaultValue));
 		}
 		return this;
 	},
@@ -150,7 +159,7 @@ export default Ember.Object.extend({
 		const page = this.get('page');
 
 		let pageSize = this.get('pageSize');
-		if (Ember.isNone(pageSize)) {
+		if (isNone(pageSize)) {
 			pageSize = items.get ? items.get('length') : items.length;
 		}
 
@@ -170,7 +179,7 @@ export default Ember.Object.extend({
 		return this;
 	},
 
-	_dataset: Ember.computed(function() {
+	_dataset: computed(function() {
 		return this.get('datasets').objectAt(0);
 	}),
 

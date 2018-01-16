@@ -3,11 +3,12 @@
  * @module components
  *
  */
-import Ember from 'ember';
+import { htmlSafe } from '@ember/string';
+import Component from '@ember/component';
+import { isEmpty, isNone } from '@ember/utils';
+import { get, computed, set } from '@ember/object';
 import layout from '../templates/components/ember-chart';
 import ChartObject from '../utils/chart-object';
-
-const { isNone, isEmpty, computed, get } = Ember;
 
 /***/
 
@@ -23,7 +24,7 @@ const { isNone, isEmpty, computed, get } = Ember;
  */
 function setDefault(object, key, value) {
 	if(isNone(get(object, key))) {
-		Ember.set(object, key, value);
+		set(object, key, value);
 	}
 }
 
@@ -31,7 +32,7 @@ function setDefault(object, key, value) {
  * `EmberChart`
  *
  */
-export default Ember.Component.extend({
+export default Component.extend({
 	layout,
 
 	// data properties
@@ -269,8 +270,8 @@ export default Ember.Component.extend({
 
 	getTypeAsArray(type, defaultValue) {
 		let arr = this.get(type);
-		if (Ember.isNone(arr)) {
-			if (!Ember.isNone(defaultValue)) {
+		if (isNone(arr)) {
+			if (!isNone(defaultValue)) {
 				arr = defaultValue;
 			} else {
 				arr = [];
@@ -415,9 +416,9 @@ export default Ember.Component.extend({
 		const pos = helpers.getRelativePosition(evt, _chart);
 
 		let scale = _chart.scale;
-		if (Ember.isNone(scale)) {
+		if (isNone(scale)) {
 			for(let i in _chart.scales) {
-				if (_chart.scales.hasOwnProperty(i) && Ember.isNone(scale)) {
+				if (_chart.scales.hasOwnProperty(i) && isNone(scale)) {
 					scale = _chart.scales[i];
 				}
 			}
@@ -477,10 +478,10 @@ export default Ember.Component.extend({
 
 	buttonDisplay: computed('showBackButton', function() {
 		if(this.get('showBackButton')) {
-			return Ember.String.htmlSafe('display:block; position:absolute; top:0; left:0;');
+			return htmlSafe('display:block; position:absolute; top:0; left:0;');
 		}
 
-		return Ember.String.htmlSafe('display:none; position:absolute;');
+		return htmlSafe('display:none; position:absolute;');
 	}),
 
 	actions: {
