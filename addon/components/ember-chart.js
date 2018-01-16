@@ -386,24 +386,27 @@ export default Component.extend({
 	},
 
 	clickAction(evt, segment) {
-		if(this.get('isModel')) {
-			segment = segment[0] || {};
-			let segmentModel = segment._model;
-			if(segmentModel && segmentModel.label === 'Other') {
-				this.set('_page', this.get('_page') + 1);
-				this.set('showBackButton', true);
-			} else if(segmentModel && segmentModel.label) {
-				let index = ((this.get('colors.length') - 2) * this.get('_page')) + segment._index;
-				let model = this.get('_chartObject').getModel(index);
-				if(!isNone(model)) {
-					this.sendAction('onClick', model);
+		let action = get(this, 'onClick');
+		if (!isNone(action)) {
+			if(get(this, 'isModel')) {
+				segment = segment[0] || {};
+				let segmentModel = segment._model;
+				if(segmentModel && segmentModel.label === 'Other') {
+					set(this, '_page', get(this, '_page') + 1);
+					set(this, 'showBackButton', true);
+				} else if(segmentModel && segmentModel.label) {
+					let index = ((get(this, 'colors.length') - 2) * get(this, '_page')) + segment._index;
+					let model = get(this, '_chartObject').getModel(index);
+					if(!isNone(model)) {
+						action(model);
+					}
+				} else {
+					// expiremental
+					//this.getClickedLabel(evt);
 				}
 			} else {
-				// expiremental
-				//this.getClickedLabel(evt);
+				action(evt, segment);
 			}
-		} else {
-			this.sendAction('onClick', evt, segment);
 		}
 	},
 
@@ -444,7 +447,9 @@ export default Component.extend({
 		} else {
 			const model = this.get('_chartObject').getModel(closestPixel);
 			if(!isNone(model)) {
-				this.sendAction('onClick', model);
+				if (!isNone(get(this, 'onClick'))) {
+					get(this, 'onClick')(model);
+				}
 			}
 		}
 	},

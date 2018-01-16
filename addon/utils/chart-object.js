@@ -19,8 +19,8 @@ import EmberObject, {
  * @class ChartObject
  */
 export default EmberObject.extend({
-  model: null,
-  labelPath: null,
+	model: null,
+	labelPath: null,
   dataPath: null,
 	modelPath: '',
   otherTitle: '',
