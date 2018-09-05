@@ -1,4 +1,3 @@
-/* global Chart */
 /**
  * @module components
  *
@@ -7,8 +6,10 @@ import { htmlSafe } from '@ember/string';
 import Component from '@ember/component';
 import { isEmpty, isNone } from '@ember/utils';
 import { get, computed, set } from '@ember/object';
+import { camelize } from '@ember/string';
 import layout from '../templates/components/ember-chart';
 import ChartObject from '../utils/chart-object';
+import Chart from 'chartjs';
 
 /***/
 
@@ -214,7 +215,7 @@ export default Component.extend({
 					options = this.setDefaultOptions(this.get('options'));
 
 		const chart = new Chart(context, {
-			type: type,
+			type: camelize(type),
 			data: _chartObject,
 			options: options
 		});

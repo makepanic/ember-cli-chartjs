@@ -21,7 +21,7 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "chart.js": "^2.7.2",
+    "chart.js": "2.1.6",
     "ember-auto-import": "^1.2.13",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1"
