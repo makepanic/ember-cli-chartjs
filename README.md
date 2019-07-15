@@ -1,15 +1,20 @@
 Ember Chartjs
 ==============================================================================
 
-This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v2.1.6). This addon uses Ember-CLI v2.6.2.
+[![Build Status](https://travis-ci.org/makepanic/ember-cli-chartjs.svg?branch=master)](https://travis-ci.org/makepanic/ember-cli-chartjs)
+
+This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/).
+
+It's a fork of [busy-web/ember-cli-chartjs](https://github.com/busy-web/ember-cli-chartjs) which removes most of the custom features (predefined styles, options) and ports it to typescript.
 
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v2.18 or above
+* Ember.js v3.4 or above
 * Ember CLI v2.13 or above
 * Node.js v8 or above
 
+**Note**: you might need [ember-native-class-polyfill](https://github.com/pzuraq/ember-native-class-polyfill) if you're on ember-source < 3.6
 
 Installation
 ------------------------------------------------------------------------------

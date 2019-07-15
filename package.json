@@ -1,10 +1,9 @@
 {
   "name": "@makepanic/ember-cli-chartjs",
-  "version": "3.0.0",
+  "version": "0.1.0",
   "description": "Ember component for ChartJS",
   "keywords": [
-    "ember-addon",
-    "busy-web"
+    "ember-addon"
   ],
   "repository": "https://github.com/busy-web/ember-cli-chartjs.git",
   "license": "MIT",
@@ -25,7 +24,7 @@
   },
   "dependencies": {
     "@types/chart.js": "^2.7.55",
-    "chart.js": "2.1.6",
+    "chart.js": "2.8.0",
     "ember-auto-import": "^1.2.13",
     "ember-cli-babel": "^7.7.3",
     "ember-cli-htmlbars": "^3.0.1",
@@ -54,6 +53,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-native-class-polyfill": "^1.0.6",
     "ember-qunit": "^4.4.1",
     "ember-resolver": "^5.0.1",
     "ember-source": "~3.10.0",

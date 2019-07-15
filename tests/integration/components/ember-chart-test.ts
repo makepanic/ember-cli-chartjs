@@ -96,9 +96,9 @@ module('Integration | Component | ember-chart', function (hooks) {
       onChartCreated=(action onChartCreated)
     }}`);
 
-    assert.equal(chart!.data.datasets[0].data[0], 300);
+    assert.equal(chart!.data.datasets![0].data![0], 300);
     this.set('dataHolder.trasher', 600);
-    assert.equal(chart!.data.datasets[0].data[0], 600);
+    assert.equal(chart!.data.datasets![0].data![0], 600);
   });
 
   test('it should update line charts dynamically', async function (assert) {
@@ -147,9 +147,11 @@ module('Integration | Component | ember-chart', function (hooks) {
 
     assert.equal(chart.config.type, 'bar');
     assert.equal(chart.data.datasets!.length, 2);
+    // @ts-ignore https://github.com/DefinitelyTyped/DefinitelyTyped/pull/36893
     assert.equal(chart.options!.responsive, true);
     assert.equal(chart.config.options!.responsive, true);
     this.set('dataHolder.options', { responsive: false });
+    // @ts-ignore https://github.com/DefinitelyTyped/DefinitelyTyped/pull/36893
     assert.equal(chart.options!.responsive, false);
     assert.equal(chart.config.options!.responsive, false);
   });
