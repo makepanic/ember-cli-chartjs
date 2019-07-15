@@ -1,18 +1,25 @@
-# Ember Chart
-[![npm version](https://badge.fury.io/js/ember-cli-chartjs.svg)](https://badge.fury.io/js/ember-cli-chartjs)
-[![Build Status](https://travis-ci.org/busybusy/ember-cli-chartjs.svg?branch=master)](https://travis-ci.org/busybusy/ember-cli-chartjs)
-[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-chartjs.svg)](https://emberobserver.com/addons/ember-cli-chartjs)
-[![Ember badge][ember-badge]][embadge]
+Ember Chartjs
+==============================================================================
 
 This Ember CLI addon is a simple wrapper for [ChartJS](http://www.chartjs.org/) (v2.1.6). This addon uses Ember-CLI v2.6.2.
 
-### Installation
+Compatibility
+------------------------------------------------------------------------------
+
+* Ember.js v2.18 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
+
+Installation
+------------------------------------------------------------------------------
 
 ```
-$ ember install ember-cli-chartjs
+ember install @makepanic/ember-cli-chartjs
 ```
 
-### Usage
+Usage
+------------------------------------------------------------------------------
 
 In your handlebars template just do:
 
@@ -26,11 +33,20 @@ In your handlebars template just do:
 * CHARTWIDTH: Number; pixel width of the canvas element. Only applies if the chart is NOT responsive.
 * CHARTHEIGHT: Number; pixel height of the canvas element. Only applies if the chart is NOT responsive.
 
-#### Example
+Example
+------------------------------------------------------------------------------
 
 ```
 {{ember-chart type='Pie' data=model.chartData width=200 height=200}}
 ```
 
-[embadge]: http://embadge.io/
-[ember-badge]: http://embadge.io/v1/badge.svg?start=2.6.0
+Contributing
+------------------------------------------------------------------------------
+
+See the [Contributing](CONTRIBUTING.md) guide for details.
+
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).

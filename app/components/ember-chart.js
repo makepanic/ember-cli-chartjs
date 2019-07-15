@@ -1,1 +1,2 @@
-export { default } from 'ember-cli-chartjs/components/ember-chart';
+import Chart from '@makepanic/ember-cli-chartjs/components/ember-chart';
+export default Chart;

@@ -1,189 +1,141 @@
-import EmberObject, { computed } from '@ember/object';
-
-// Test Data
-export default EmberObject.extend({
-  pieModelValue1: 300,
-  pieModelValue2: 50,
-  pieModelValue3: 100,
-  pieModelDataColors: computed(function() {
-		return ["#F7464A", "#46BFBD", "#FDB45C", "#FF5A5E"];
-	}),
-
-  pieModelData: computed('pieModelValue1', 'pieModelValue2', 'pieModelValue3', function() {
-    return [
+export const testData = {
+  pieData: {
+    labels: ['Red', "Green", "Yellow"],
+    datasets: [
       {
-        value: parseInt(this.get('pieModelValue1')),
-        label: "Red"
-      },
-      {
-        value: parseInt(this.get('pieModelValue2')),
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: parseInt(this.get('pieModelValue3')),
-        highlight: "#FFC870",
-        label: "Yellow"
+        data: [
+          300,
+          50,
+          100
+        ],
+        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
+        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
       }
-    ];
-  }),
+    ]
+  },
 
-  pieValue1: 300,
-  pieValue2: 50,
-  pieValue3: 100,
-  pieData: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
-    return {
-      labels: ['Red', "Green", "Yellow"],
-      datasets: [
-        {
-          data: [
-            parseInt(this.get('pieValue1')),
-            parseInt(this.get('pieValue2')),
-            parseInt(this.get('pieValue3'))
-          ],
-          backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
-          hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
-        }
-      ]
-    };
-  }),
+  pieData2: {
+    labels: ["Black", "Red", "Yellow"],
+    datasets: [
+      {
+        data: [20, 310, 101],
+        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
+        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
+      }
+    ]
+  },
 
-  pieData2: computed('pieValue1', 'pieValue2', 'pieValue3', function(){
-    return {
-      labels: ["Black", "Red", "Yellow"],
-      datasets: [
-        {
-          data: [20, 310, 101],
-          backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C"],
-          hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870"]
-        }
-      ]
-    };
-  }),
+  lineData: {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  },
 
-  labelValue1: "January",
-  lineValue1: 65,
-  lineValue2: 59,
+  lineData2: {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      },
+      {
+        label: "My Third dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  },
 
-	lineData: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
-    return {
-			labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
-			datasets: [
-				{
-					label: "My First dataset",
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [parseInt(this.get('lineValue1')), parseInt(this.get('lineValue2')), 80, 81, 56, 55, 40]
-				},
-				{
-					label: "My Second dataset",
-					fillColor: "rgba(151,187,205,0.2)",
-					strokeColor: "rgba(151,187,205,1)",
-					pointColor: "rgba(151,187,205,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86, 27, 90]
-				}
-			]
-    };
-  }),
+  lineData3: {
+    labels: ['January', "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [65, 59, 80, 81]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40, 19, 86, 27, 90]
+      }
+    ]
+  },
 
-	lineData2: computed(function(){
-    return {
-			labels: ["January", "February", "March", "April", "May", "June", "July"],
-			datasets: [
-				{
-					label: "My First dataset",
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [parseInt(this.get('lineValue1')), parseInt(this.get('lineValue2')), 80, 81, 56, 55, 40]
-				},
-				{
-					label: "My Second dataset",
-					fillColor: "rgba(151,187,205,0.2)",
-					strokeColor: "rgba(151,187,205,1)",
-					pointColor: "rgba(151,187,205,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86, 27, 90]
-				},
-				{
-					label: "My Third dataset",
-					fillColor: "rgba(151,187,205,0.2)",
-					strokeColor: "rgba(151,187,205,1)",
-					pointColor: "rgba(151,187,205,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86, 27, 90]
-				}
-			]
-    };
-  }),
-
-  lineData3: computed('lineValue1', 'lineValue2', 'labelValue1', function(){
-    return {
-			labels: [this.get('labelValue1'), "February", "March", "April", "May", "June", "July"],
-			datasets: [
-				{
-					label: "My First dataset",
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [parseInt(this.get('lineValue1')), parseInt(this.get('lineValue2')), 80, 81]
-				},
-				{
-					label: "My Second dataset",
-					fillColor: "rgba(151,187,205,0.2)",
-					strokeColor: "rgba(151,187,205,1)",
-					pointColor: "rgba(151,187,205,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40, 19, 86, 27, 90]
-				}
-			]
-    };
-  }),
-
-  barData: computed(function(){
-    return {
-			labels: ["January", "February", "March"],
-			datasets: [
-				{
-					label: "My First dataset",
-					fillColor: "rgba(220,220,220,0.2)",
-					strokeColor: "rgba(220,220,220,1)",
-					pointColor: "rgba(220,220,220,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(220,220,220,1)",
-					data: [55, 41, 80]
-				},
-				{
-					label: "My Second dataset",
-					fillColor: "rgba(151,187,205,0.2)",
-					strokeColor: "rgba(151,187,205,1)",
-					pointColor: "rgba(151,187,205,1)",
-					pointStrokeColor: "#fff",
-					pointHighlightFill: "#fff",
-					pointHighlightStroke: "rgba(151,187,205,1)",
-					data: [28, 48, 40]
-				}
-			]
-    };
-  }),
-});
+  barData: {
+    labels: ["January", "February", "March"],
+    datasets: [
+      {
+        label: "My First dataset",
+        fillColor: "rgba(220,220,220,0.2)",
+        strokeColor: "rgba(220,220,220,1)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: [55, 41, 80]
+      },
+      {
+        label: "My Second dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [28, 48, 40]
+      }
+    ]
+  },
+};
