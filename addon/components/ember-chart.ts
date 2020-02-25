@@ -1,7 +1,18 @@
 // @ts-ignore: Ignore import of compiled template
 import layout from '../templates/components/ember-chart';
 import Component from '@ember/component';
-import Chart from 'chart.js';
+import { assert } from '@ember/debug';
+
+let ImportedChartJs: Chart | undefined = undefined;
+
+export async function ensureChartjs(): Promise<Chart> {
+  if (ImportedChartJs) return ImportedChartJs;
+
+  // @ts-ignore
+  ImportedChartJs = (await import('chart.js')).default as Chart;
+
+  return ImportedChartJs;
+}
 
 export default class EmberChart extends Component {
   layout = layout;
@@ -21,6 +32,8 @@ export default class EmberChart extends Component {
   onChartCreated: (chart: Chart) => void = () => {};
 
   didInsertElement(): void {
+    assert('Must have awaited `ensureChartjs`', ImportedChartJs !== undefined);
+
     super.didInsertElement();
 
     this.chart = this.createChart();
@@ -40,7 +53,8 @@ export default class EmberChart extends Component {
     const context = this.element.querySelector('canvas');
     const {type, options, data} = this;
 
-    return new Chart(context!, {
+    // @ts-ignore
+    return new ImportedChartJs(context!, {
       type,
       data,
       options: options || {}

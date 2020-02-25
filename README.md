@@ -10,11 +10,10 @@ It's a fork of [busy-web/ember-cli-chartjs](https://github.com/busy-web/ember-cl
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.4 or above
+* Ember.js v3.12 or above
 * Ember CLI v2.13 or above
-* Node.js v8 or above
+* Node.js v10 or above
 
-**Note**: you might need [ember-native-class-polyfill](https://github.com/pzuraq/ember-native-class-polyfill) if you're on ember-source < 3.6
 
 Installation
 ------------------------------------------------------------------------------
@@ -25,6 +24,23 @@ ember install @makepanic/ember-cli-chartjs
 
 Usage
 ------------------------------------------------------------------------------
+
+Before using the component, you have to load `chart.js`. 
+To do this, await the result of the `ensureChartjs` method. 
+
+This change was made, because usually it's better to lazily load the dependency as not every route needs charts.
+
+```js
+import Route from '@ember/routing/route';
+import { ensureChartjs } from '@makepanic/ember-cli-chartjs/components/ember-chart';
+
+export default class ChartRoute extends Route {
+    beforeModel(){
+        return ensureChartjs();
+    }
+}
+```
+
 
 In your handlebars template just do:
 
