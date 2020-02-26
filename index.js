@@ -6,6 +6,6 @@ module.exports = {
   options: {
     babel: {
       plugins: [ require.resolve('ember-auto-import/babel-plugin') ]
-    }
+    },
   }
 };

@@ -4,7 +4,16 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
-    // Add options here
+    // fix lazy chunk loading, see https://github.com/ef4/ember-auto-import/issues/133#issuecomment-437645242
+    autoImport: {
+      webpack: {
+        optimization: {
+          splitChunks: {
+            chunks: 'async'
+          }
+        }
+      }
+    }
   });
 
   /*
