@@ -5,10 +5,13 @@ import hbs from 'htmlbars-inline-precompile';
 import {testData} from 'dummy/tests/helpers/ember-chart-data';
 import Chart from 'chart.js';
 import EmberObject, {computed} from '@ember/object';
-
+import {ensureChartjs} from '@makepanic/ember-cli-chartjs/components/ember-chart';
 
 module('Integration | Component | ember-chart', function (hooks) {
   setupRenderingTest(hooks);
+  hooks.beforeEach(async () => {
+    await ensureChartjs();
+  });
 
   test('it can be a pie chart', async function (assert) {
     this.set('data', testData.pieData);

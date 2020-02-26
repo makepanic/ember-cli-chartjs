@@ -1,7 +1,6 @@
-// @ts-ignore: Ignore import of compiled template
-import layout from '../templates/components/ember-chart';
-import Component from '@ember/component';
-import { assert } from '@ember/debug';
+import Component from '@glimmer/component';
+import {assert} from '@ember/debug';
+import {action} from "@ember/object";
 
 let ImportedChartJs: Chart | undefined = undefined;
 
@@ -14,65 +13,53 @@ export async function ensureChartjs(): Promise<Chart> {
   return ImportedChartJs;
 }
 
-export default class EmberChart extends Component {
-  layout = layout;
+export interface EmberChartArgs {
+  type: Chart.ChartType | string;
+  data: Chart.ChartData;
+  options: Chart.ChartOptions;
+  onChartCreated?: (chart: Chart) => void
 
+  id?: string;
+  width?: number;
+  height?: number;
+}
+
+export default class EmberChart extends Component<EmberChartArgs> {
   private chart!: Chart;
 
-  width: number = 600;
-
-  height: number = 600;
-
-  type!: Chart.ChartType | string;
-
-  data!: Chart.ChartData;
-
-  options!: Chart.ChartOptions;
-
-  onChartCreated: (chart: Chart) => void = () => {};
-
-  didInsertElement(): void {
+  @action
+  didInsert(element: HTMLCanvasElement): void {
     assert('Must have awaited `ensureChartjs`', ImportedChartJs !== undefined);
 
-    super.didInsertElement();
-
-    this.chart = this.createChart();
-    this.onChartCreated(this.chart);
-
-    this.addObserver('data', this, this.updateChart);
-    this.addObserver(
-      // @ts-ignore
-      'data.[]',
-      this, this.updateChart);
-
-    this.addObserver('options', this, this.redrawChart);
-    this.addObserver('type', this, this.redrawChart);
+    this.chart = this.createChart(element);
+    this.args.onChartCreated?.(this.chart);
   }
 
-  createChart(): Chart {
-    const context = this.element.querySelector('canvas');
-    const {type, options, data} = this;
+  createChart(element: HTMLCanvasElement): Chart {
+    const {type, options, data} = this.args;
 
     // @ts-ignore
-    return new ImportedChartJs(context!, {
+    return new ImportedChartJs(element, {
       type,
       data,
-      options: options || {}
+      options: options ?? {}
     });
   }
 
+  @action
   updateChart() {
-    const {data, chart} = this;
-    chart.config.data = data;
+    const {chart} = this;
+    chart.config.data = this.args.data;
     chart.update();
   }
 
-  redrawChart() {
+  @action
+  redrawChart(element: HTMLCanvasElement) {
     const {chart} = this;
     if (chart) {
       chart.destroy();
     }
-    this.chart = this.createChart();
-    this.onChartCreated(this.chart);
+    this.chart = this.createChart(element);
+    this.args.onChartCreated?.(this.chart);
   }
 };
