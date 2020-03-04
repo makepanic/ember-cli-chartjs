@@ -28,16 +28,16 @@
         "tests/dummy/app/*",
         "app/*"
       ],
-      "ember-cli-chartjs": [
+      "@makepanic/ember-cli-chartjs": [
         "addon"
       ],
-      "ember-cli-chartjs/*": [
+      "@makepanic/ember-cli-chartjs/*": [
         "addon/*"
       ],
-      "ember-cli-chartjs/test-support": [
+      "@makepanic/ember-cli-chartjs/test-support": [
         "addon-test-support"
       ],
-      "ember-cli-chartjs/test-support/*": [
+      "@makepanic/ember-cli-chartjs/test-support/*": [
         "addon-test-support/*"
       ],
       "*": [
